@@ -7,7 +7,7 @@ def get_all_user():
     
     users: list[User] = db.session.execute(db.select(User)).scalars()
 
-    return { 'data': [
+    return { 'users': [
         {
             'created_at': user.created_at,
             'updated_at': user.updated_at,
@@ -23,12 +23,10 @@ def get_user():
     user: User = flask.g.user
 
     return {
-        'data': {
-            'created_at': user.created_at,
-            'updated_at': user.updated_at,
-            'id': user.id,
-            'username': user.username,
-        }
+        'created_at': user.created_at,
+        'updated_at': user.updated_at,
+        'id': user.id,
+        'username': user.username,
     }, 200
 
 

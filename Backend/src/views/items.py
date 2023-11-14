@@ -9,7 +9,7 @@ def get_all_items():
 
     user: models.User = flask.g.user
 
-    return { 'data': [
+    return { 'items': [
         {
             'created_at': item.created_at,
             'updated_at': item.updated_at,

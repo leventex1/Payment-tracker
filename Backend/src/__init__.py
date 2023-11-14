@@ -3,6 +3,7 @@ import flask_sqlalchemy
 import sqlalchemy
 import flask_bcrypt
 import flask_migrate
+import flask_cors
 
 class Config:
     SECRET='68725b0f29c48fa75e9fdc97463b9cea'
@@ -23,6 +24,7 @@ metadata = sqlalchemy.MetaData(naming_convention=convention)
 db = flask_sqlalchemy.SQLAlchemy(model_class=Base, metadata=metadata)
 bcrypt = flask_bcrypt.Bcrypt()
 migrate = flask_migrate.Migrate(render_as_batch=True)
+cors = flask_cors.CORS()
 
 
 def create_app() -> flask.Flask:
@@ -32,6 +34,7 @@ def create_app() -> flask.Flask:
     db.init_app(flask_app)
     bcrypt.init_app(flask_app)
     migrate.init_app(flask_app, db)
+    cors.init_app(flask_app)
 
     with flask_app.app_context():
         db.create_all()

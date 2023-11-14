@@ -19,4 +19,4 @@ def login_user():
         return { 'message': 'Ivalid authentication' }, 403
     
     access_token = auth_utils.encode_access_token(auth_user.user.id)
-    return { 'message': 'Successfull authentication', 'data': { 'access_token': access_token } }, 200
+    return { 'message': 'Successfull authentication', 'access_token': access_token }, 200
