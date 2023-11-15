@@ -4,11 +4,19 @@ import Logo from "common/brand/Logo";
 import CurrentUserContext, { CurrentUserUtilityContext } from "contexts/CurrentUser";
 import { useContext } from "react";
 import Colors from "data/colors";
+import { useNavigate } from "react-router-dom";
 
 const NavBar : React.FunctionComponent = () => {
 
+    const navigator = useNavigate();
+
     const { currentUser } = useContext(CurrentUserContext);
     const { logoutUser } = useContext(CurrentUserUtilityContext)
+
+    const onLogout = () => {
+        logoutUser();
+        navigator('/');
+    }
 
     const container : React.CSSProperties = {
         display: 'flex',
@@ -39,7 +47,7 @@ const NavBar : React.FunctionComponent = () => {
                     </span>
                     <SecondaryButton 
                         text="Log Out"
-                        onClick={logoutUser}
+                        onClick={onLogout}
                     />
                 </div>
             }

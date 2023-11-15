@@ -54,7 +54,7 @@ const LoginFrom : React.FunctionComponent = () => {
             />
 
             {   isLoading &&
-                <p>
+                <p style={{ color: Colors.secondary }}>
                     Loading...
                 </p>
             }

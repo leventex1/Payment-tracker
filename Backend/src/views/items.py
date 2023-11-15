@@ -22,6 +22,28 @@ def get_all_items():
 
 
 @auth_utils.access_token_required
+def get_item(item_id: int):
+
+    user: models.User = flask.g.user
+
+    item: models.Item = db.session.execute(db.select(models.Item).filter_by(id=item_id)).scalar()
+    if not item:
+        return { 'message': 'Item not found' }, 404
+    
+    if item.user != user:
+        return { 'message': 'Access required' }, 403
+    
+    return { 'message': 'Item retrieved', 'item': {
+        'created_at': item.created_at,
+        'updated_at': item.updated_at,
+        'id': item.id,
+        'name': item.name,
+        'amount': item.amount,
+        'recursion': item.recursion
+    }}, 200
+
+
+@auth_utils.access_token_required
 def create_item():
 
     user: models.User = flask.g.user
@@ -70,6 +92,8 @@ def update_item(item_id: int):
     if isinstance(data.get('recursion'), int):
         item.recursion = data.get('recursion')
         updated.append('recursion')
+        
+    db.session.commit()
 
     return { 'message': 'Item updated', 'updated': updated }, 200
 

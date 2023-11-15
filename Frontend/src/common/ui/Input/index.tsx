@@ -5,8 +5,8 @@ type Props = {
     name: string,
     label: string;
     type: string;
-    value: string;
-    setValue: (v: string) => void;
+    value: any;
+    setValue: (v: any) => void;
     placeholder?: string | undefined;
 }
 
