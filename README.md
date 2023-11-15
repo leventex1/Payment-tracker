@@ -14,3 +14,18 @@ Install the requirements
 Start the backend in a terminal
 
     python run.py
+
+
+## Frontend
+
+Got into the Frontend folder
+
+    dc Frontend
+
+Install dependencies
+
+    npm i
+
+Start the frontend webserver
+
+    npm run dev
